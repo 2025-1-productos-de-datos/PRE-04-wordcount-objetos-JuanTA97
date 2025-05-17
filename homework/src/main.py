@@ -9,29 +9,28 @@ from homework.src._internals.write_word_counts import WriteWordCountsMixin
 class WordCountApp(
     ParseArgsMixin,
     ReadAllLinesMixin,
-    CountWordsMixin,
     PreprocessLinesMixin,
     SplitIntoWordsMixin,
+    CountWordsMixin,
     WriteWordCountsMixin,
 ):
-
-    def _init_(self):
+    def __init__(self):
         self.input_folder = None
         self.output_folder = None
         self.lines = None
         self.preprocessed_lines = None
-        self.word_counts = None
         self.words = None
+        self.word_counts = None
 
     def run(self):
 
         self.parse_args()
         self.read_all_lines()
         self.preprocess_lines()
-        self.split_into_words()
+        words = self.split_into_words()
         self.count_words()
         self.write_word_counts()
 
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     WordCountApp().run()
